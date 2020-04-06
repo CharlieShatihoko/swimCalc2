@@ -56,7 +56,7 @@ router.post('/', function(req, res, next) {
   res.redirect('/');
 });
 
-router.post('/tweet',  function(req, res){
+router.get('/tweet',  function(req, res, next){
   oa.post('https://api.twitter.com/1.1/statuses/update.json', user.token, user.tokenSecret, {"status":tweet} ,function(error,tweets,respons){
     if(error){
       console.error('tweet failed');
