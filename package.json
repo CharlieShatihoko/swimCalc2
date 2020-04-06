@@ -6,16 +6,21 @@
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "debugstart": "DEBUG=swimCalc2:* PORT=8000 yarn run devstart",
-    "test":"node_modules/mocha/bin/mocha"
+    "test": "node_modules/mocha/bin/mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.0",
+    "express-session": "^1.17.0",
     "helmet": "1.1.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
-    "pug": "2.0.0-beta11"
+    "passport": "^0.4.1",
+    "passport-twitter": "^1.0.4",
+    "pug": "2.0.0-beta11",
+    "twitter": "*"
   },
   "devDependencies": {
     "mocha": "4.0.1",
