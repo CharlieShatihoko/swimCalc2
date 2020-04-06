@@ -94,6 +94,7 @@ app.use(express.static(path.join(__dirname, 'public')));//ファイルを直接�
 
 
 app.use('/', indexRouter);
+app.use('/tweet',indexRouter);
 app.use('/users', usersRouter);
 
 //tweetをクリックしたら
