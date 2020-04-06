@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Caluculator
+  body
+    h1 Time Calc
+    h2 Enter time
+    form(method="post" action="/")
+      div
+        textarea(id=content name="content" cols=40 rows=4)
+      div
+        button(type="submit") CALUCULATE
+    h2 RESULT
+    p #{tweet}
