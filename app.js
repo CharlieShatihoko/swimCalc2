@@ -15,8 +15,7 @@ var session = require('express-session');
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter');
 user = { id: "foo" };
-var OAuth = require('oauth').OAuth;
-var oa;
+
 
 //route に使う
 var indexRouter = require('./routes/index');
