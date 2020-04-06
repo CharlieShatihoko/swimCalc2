@@ -14,7 +14,9 @@ const consumerSecret= process.env.NODE_ENV_ConsumerSecret;
 var session = require('express-session');
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter');
-
+user = { id: "foo" };
+var OAuth = require('oauth').OAuth;
+var oa;
 
 //route に使う
 var indexRouter = require('./routes/index');
@@ -22,13 +24,16 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 
+
+
+
 // セッションへの保存と読み出し ・・・・①
 passport.serializeUser((user, callback) => {
-  callback(null, user);
+  callback(null, user.id);
 });
 
 passport.deserializeUser((obj, callback) => {
-  callback(null, obj);
+  callback(null, user);
 });
 
 // 認証の設定 ・・・・②
@@ -38,9 +43,9 @@ passport.use(new TwitterStrategy({
   //callbackURL: config.get('twitter.callbackUrl')
 },
 // 認証後のアクション
-(accessToken, refreshToken, profile, callback) => {
+(accessToken, tokenSecret, profile, callback) => {
   process.nextTick(() => {
-      console.log(profile); //必要に応じて変更
+       //必要に応じて変更
       return callback(null, profile);
   });
 }));
@@ -91,6 +96,7 @@ app.use(express.static(path.join(__dirname, 'public')));//ファイルを直接�
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+//tweetをクリックしたら
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -109,4 +115,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports = {app, user};
+

@@ -9,7 +9,7 @@ var mktweet = require('./mktweet');
 var session = require('express-session');
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter');
-
+var user = require('../app').user;
 
 var timeData = {
   timeMin: [],
@@ -36,9 +36,8 @@ router.post('/', function(req, res, next) {
   res.redirect('/');
 });
 
-//tweetをクリックしたら
-router.get('/tweet',  function(req, res){
-  profile.post('statuses/update', tweet, function(error,tweets,respons){
+router.post('/tweet',  function(req, res){
+  user.post('statuses/update', tweet, function(error,tweets,respons){
     if(error){
       console.error('tweet failed');
     }
