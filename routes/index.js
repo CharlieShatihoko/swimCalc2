@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 });
 
 //tweetをクリックしたら
-router.get('/tweet', passport.authenticate('twitter', {failureRedirect: '/' }), function(req, res){
+router.get('/tweet',  function(req, res){
   profile.post('statuses/update', tweet, function(error,tweets,respons){
     if(error){
       console.error('tweet failed');
