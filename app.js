@@ -4,82 +4,49 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var helmet = require('helmet');
+//var Twitter = require('twitter');
+var OAuth = require('oauthio');
+var session = require('express-session');
+
 //環境変数の呼び出し
 require('dotenv').config();
+const publickey = process.env.NODE_ENV_PublicKey;
+const secretKey = process.env.NODE_ENV_SecretKey;
 const consumerKey = process.env.NODE_ENV_ConsumerKey;
-const consumerSecret= process.env.NODE_ENV_ConsumerSecret;
+const consumerSecret = process.env.NODE_ENV_ConsumerSecret;
 
-//OAuth用の呼び出し
-//var config = require('./config');
-var session = require('express-session');
-var passport = require('passport');
-var TwitterStrategy = require('passport-twitter');
-user = { id: "foo" };
-
-
-//route に使う
+//route に使う用
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var app = express();
-
-
-
-
-
-// セッションへの保存と読み出し ・・・・①
-passport.serializeUser((user, callback) => {
-  callback(null, user.id);
-});
-
-passport.deserializeUser((obj, callback) => {
-  callback(null, user);
-});
-
-// 認証の設定 ・・・・②
-passport.use(new TwitterStrategy({
-  consumerKey: consumerKey,
-  consumerSecret: consumerSecret,
-  //callbackURL: config.get('twitter.callbackUrl')
-},
-// 認証後のアクション
-(accessToken, tokenSecret, profile, callback) => {
-  process.nextTick(() => {
-       //必要に応じて変更
-      return callback(null, profile);
-  });
-}));
-
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-// セッションの設定　・・・・①
-app.use(session({
-  secret: 'reply-analyzer',
-  resave: false,
-  saveUninitialized: false
-}));
-app.use(passport.initialize());
-app.use(passport.session()); // ・・・・①
-
-// 指定したpathで認証　・・・・③
-app.get('/auth/twitter', passport.authenticate('twitter'));
-
-// callback後の設定　・・・・④
-app.get('/auth/twitter/callback', passport.authenticate('twitter', {failureRedirect: '/login' }), (req, res) => {
-  res.redirect('/'); //認証後のリダイレクト
-});
-
-//app.get('/', function(req, res) {
-//  res.render('index', {title : 'タイトル'});
-//});
-
-//app.listen(8000)
-
-
-//express and router
-
-
 app.use(helmet());
+
+//aouth.ioはexpress-sessionが必要
+app.use(session({
+  secret: 'erikaoshi',
+  resave: false,
+  saveUninitialized: true
+}));
+
+//oauth.ioのリクエストオブジェクト
+//var twitter = OAuth.create('twitter');
+
+//ここからOAuth.ioで認証とツイート
+OAuth.initialize(publickey, secretKey);
+app.get('/signin', OAuth.auth('twitter', 'http://localhost:3000/oauth/redirect'));
+
+app.get('/oauth/redirect', OAuth.redirect(function(result, req, res) {
+    if (result instanceof Error) {
+        res.send(500, "error: " + result.message);
+        return;
+    }
+    result.me().done(function(me) {
+        console.log(me);
+        //res.send(200, JSON.stringify(me));
+        //res.redirect('/');
+    });
+    result.post('twitter', 'hello world')
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -115,5 +82,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = {app, user};
-
+module.exports = app;
