@@ -12,7 +12,6 @@ html(lang="en")
       div
         button(type="submit") CALUCULATE
     h2 RESULT
-    p #{tweet}
-    a(href="/") RESET
-    a(href="/signin") Twttter認証
-    a(href="/tweet") Tweet!!
+    ul 
+      each val in tweet
+        li #{val}
