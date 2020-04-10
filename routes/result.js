@@ -5,7 +5,6 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
   var sessionData = req.session;
-  console.info(sessionData.tweet);
   res.render('form', {tweet: sessionData.tweet});
 });
 
@@ -14,7 +13,6 @@ router.post('/', function(req, res, next) {
   timeData = calc.rapCalcutator(data);
   var sessionData = req.session;
   sessionData.tweet = mktweet.makeTweet(timeData)
-  console.info(sessionData.tweet);
   console.log('normal ended');
   res.redirect('/result');
 });
