@@ -4,6 +4,8 @@ function rapCalcutator( str ){
   console.info(str);
   var tmp = [];
   var timeData = {
+
+
     timeMin: [],
     timeSec: [],
     timeDeg: [],
@@ -43,8 +45,9 @@ function rapCalcutator( str ){
     //ラップ配列の計算
     for(let t =1; t<=timeData.rapNumber; t++){
       timeData.rapSec[t] = parseInt(timeData.secTime[t] - timeData.secTime[t-1]);
-      timeData.rapDeg[t] = timeData.secTime[t] - timeData.secTime[t-1] - parseInt(timeData.secTime[t]) + parseInt(timeData.secTime[t-1]);
+      timeData.rapDeg[t] = parseInt((timeData.secTime[t] - timeData.secTime[t-1] - timeData.rapSec[t])*100);
       //タイムデータはオブジェクトtimeDataに保管
+      //rapDegは二桁の正の整数
     }
   return timeData;//timeDataを返す
 };
