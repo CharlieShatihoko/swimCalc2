@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Caluculator
+  body
+    h1 DATA SETTINGS
+    h2 Enter more data
+    form(method="post" action="/addData") 大会名
+      input(type="text" name="nameOfMeet") 
+      |大会名
+      br
+      input(type="date", name="date")
+      |日付
+      br
+      input(type="text" name="nameOfSwimmer") 
+      |選手名
+      br
+      input(type="text" name="length") 
+      |距離
+      br
+      input(type="radio", value="fr" name="style") 
+      |FR
+      input(type="radio", value="fly" name="style") 
+      |FLY
+      input(type="radio", value="ba" name="style") 
+      |Ba
+      input(type="radio", value="br" name="style") 
+      |Br
+      button(type="submit") 登録

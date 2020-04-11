@@ -21,7 +21,9 @@ var timeData = {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('form', {tweet: '0'});
+  var sessionData = req.session;
+  sessionData.tweet = '0';
+  res.render('form', {tweet: sessionData.tweet});
 });
 
 router.post('/', function(req, res, next) {

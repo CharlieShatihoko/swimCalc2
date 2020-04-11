@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Caluculator
+  body
+    h1 Confirm Data
+    h2 基本情報
+    p 大会名：#{nameOfMeet}
+    p 日付：#{date}
+    p 選手名：#{nameOfSwimmer}
+    p 距離：#{length}
+    p 種目：#{style}
+    h2 TIME
+    ul 
+      each val in tweet
+        li #{val}
+    a(href="http:/") TIME IMPUT PAGE
+    br
+    a(href="http:/addData") DATA IMPUT PAGE
+    br
+    a(href="http:/tweet") Tweet
+    br
+    a(href="http:/afterAdd") ADD TO DATABESE
+    
+

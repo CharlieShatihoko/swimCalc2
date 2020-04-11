@@ -5,10 +5,30 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var helmet = require('helmet');
 var session = require('express-session');
+
 //route に使う用
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var resultRouter = require('./routes/result');
+var addData = require('./routes/addData');
+var afterAdd = require('./routes/afterAdd');
+var TweetPage = require('./routes/tweet');
+
+
+//データベース関係
+//モデルの読み込み
+var Swimmer = require('./models/swimmer');
+var Competition = require('./models/competition');
+var Record = require('./models/record');
+var Style = require('./models/style');
+Record.sync().then(()=>{
+  Swimmer.belongsTo(Record, {foreignKey: 'swimmerId'});
+  Swimmer.sync();
+  Competition.belongsTo(Record, {foreignKey: 'competitionId'});
+  Competition.sync();
+  Style.belongsTo(Record, {foreignKey: 'styleId'});
+  Style.sync();
+});
 
 //expressの各種設定
 var app = express();
@@ -37,10 +57,11 @@ app.set('view engine', 'pug');
 
 //routerの利用
 app.use('/', indexRouter);
-
 app.use('/users', usersRouter);
 app.use('/result',resultRouter);
-
+app.use('/addData', addData);
+app.use('/afterAdd', afterAdd);
+app.use('/tweet',TweetPage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
