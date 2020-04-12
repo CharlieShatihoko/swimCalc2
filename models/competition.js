@@ -7,7 +7,7 @@ const Competition = loader.database.define('competitions',{
   competitionId: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    allowNull: false
+    allowNull:true
   },
   date: {
     type: Sequelize.DATE,

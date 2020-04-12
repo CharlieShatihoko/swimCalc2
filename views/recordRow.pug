@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    title Caluculator
+  body
+    h1 Record Page
+    h3 Latest Records
+    table
+      tr
+        th 選手id
+        th 種目コード
+        th 記録
+      each record in records
+        tr
+          th #{record.swimmerId}
+          th #{record.styleId}

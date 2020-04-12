@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
   //登録完了を知らせる
   res.render('afterAdd',{
     nameOfMeet: sessionData.nameOfMeet,
-    date: sessionData.date,
     nameOfSwimmer: sessionData.nameOfSwimmer,
     length: sessionData.length,
     style: sessionData.style,

@@ -13,6 +13,7 @@ var resultRouter = require('./routes/result');
 var addData = require('./routes/addData');
 var afterAdd = require('./routes/afterAdd');
 var TweetPage = require('./routes/tweet');
+var recordPage = require('./routes/record');
 
 
 //データベース関係
@@ -62,6 +63,7 @@ app.use('/result',resultRouter);
 app.use('/addData', addData);
 app.use('/afterAdd', afterAdd);
 app.use('/tweet',TweetPage);
+app.use('/record', recordPage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

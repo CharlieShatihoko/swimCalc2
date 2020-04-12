@@ -6,12 +6,16 @@ html(lang="en")
   body
     h1 Thank you for adding data!
     h2 入力情報
-    p 大会名：#{nameOfMeet}
-    p 日付：#{date}
-    p 選手名：#{nameOfSwimmer}
+    p 大会コード：#{nameOfMeet}
+    p 大会名：
+    p 選手コード：#{nameOfSwimmer}
+    p 選手名：
     p 距離：#{length}
     p 種目：#{style}
     h3 TIME
     ul 
       each val in tweet
         li #{val}
+    br
+    a(href="/") GO TO TOP PAGE
+    a(href="/tweet") Tweet

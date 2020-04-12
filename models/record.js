@@ -7,8 +7,7 @@ const Record = loader.database.define('records',{
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
-    allowNull: false,
-    defaultValue: 1
+    allowNull: false
   },
   competitionId: {
     type: Sequelize.INTEGER,

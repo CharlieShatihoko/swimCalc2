@@ -39,7 +39,6 @@ router.get('/dataConfirm', function(req, res, next){
   res.render('confirm',{
     //変数渡し
     nameOfMeet: sessionData.nameOfMeet,
-    date: sessionData.date,
     nameOfSwimmer: sessionData.nameOfSwimmer,
     length: sessionData.length,
     style: sessionData.style,

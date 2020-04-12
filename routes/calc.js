@@ -55,10 +55,10 @@ function rapCalcutator( str , req){
       console.info((timeData.rapDeg[t]));
       //タイムデータはオブジェクトtimeDataに保管
       //rapDegは二桁の正の整数
-      rap[t+1] = timeData.secTime[t] - timeData.secTime[t-1] ;
+      rap[t] = timeData.secTime[t] - timeData.secTime[t-1] ;
     }
 
-    sessionData.split = split;
+    sessionData.split = timeData.secTime;
     sessionData.rap = rap;
 
   return timeData;//timeDataを返す
