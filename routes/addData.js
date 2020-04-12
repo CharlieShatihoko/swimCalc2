@@ -15,10 +15,17 @@ router.post('/', function(req, res, next) {
   var sessionData = req.session;
   //受け取り、格納する
   sessionData.nameOfMeet = req.body.nameOfMeet;
-  sessionData.date = req.body.date;
   sessionData.nameOfSwimmer = req.body.nameOfSwimmer;
   sessionData.length = req.body.length;
   sessionData.style = req.body.style;
+  sessionData.pool = req.body.pool;
+  
+  //エラー判定
+  if(!sessionData.nameOfMeet ||
+      !sessionData.nameOfSwimmer||
+      !sessionData.style||
+      !sessionData.pool)
+    {res.wrte('error!')};
 
   //リダイレクト処理
   res.redirect('/addData/dataConfirm');

@@ -5,8 +5,10 @@ const Sequelize = loader.Sequelize;
 const Record = loader.database.define('records',{
   recordId:{
     type: Sequelize.INTEGER,
+    autoIncrement: true,
     primaryKey: true,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 1
   },
   competitionId: {
     type: Sequelize.INTEGER,
@@ -22,7 +24,7 @@ const Record = loader.database.define('records',{
   },
   rap: {
     type:Sequelize.ARRAY(Sequelize.DOUBLE(6,2)),
-    allowNull: false
+    allowNull: true
   },
   styleId: {
     type: Sequelize.INTEGER,
@@ -30,7 +32,7 @@ const Record = loader.database.define('records',{
   }
 },{
   freezeTableName: true,
-  timesramps: false,
+  timestamps: false,
   indexes:[
     {
       fields: ['swimmerId']

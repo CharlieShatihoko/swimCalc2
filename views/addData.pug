@@ -7,17 +7,19 @@ html(lang="en")
     h1 DATA SETTINGS
     h2 Enter more data
     form(method="post" action="/addData") 大会名
-      input(type="text" name="nameOfMeet") 
-      |大会名
+      input(type="number" name="nameOfMeet") 
+      |競技会番号
       br
-      input(type="date", name="date")
-      |日付
+      input(type="number" name="nameOfSwimmer") 
+      |選手ID番号
       br
-      input(type="text" name="nameOfSwimmer") 
-      |選手名
-      br
-      input(type="text" name="length") 
+      input(type="number" name="length") 
       |距離
+      br
+      input(type="radio", value="1" name="pool")
+      |短水路
+      input(type="radio", value="2" name="pool")
+      |長水路
       br
       input(type="radio", value="fr" name="style") 
       |FR

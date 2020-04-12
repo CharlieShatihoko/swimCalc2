@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var data = JSON.stringify(req.body);
-  timeData = calc.rapCalcutator(data);
+  timeData = calc.rapCalcutator(data, req);
   var sessionData = req.session;
   sessionData.tweet = mktweet.makeTweet(timeData)
   console.info(sessionData.tweet);
